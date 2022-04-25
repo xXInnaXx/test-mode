@@ -31,7 +31,7 @@ public class TestTestMode {
 
     @Test
     void shouldCreateUserAndLoginToAccount() {
-        var registrationInfo = createRegisterUserWithStatus(ACTIVE);
+        var registrationInfo = createRegisterUserWithStatus("active");
         $("[data-test-id=login] input").setValue(registrationInfo.getLogin());
         $("[data-test-id=password] input").setValue(registrationInfo.getPassword());
         $$(byXpath("//*[@data-test-id='action-login']/span/span[1]")).find(exactText("Продолжить")).click();
@@ -40,7 +40,7 @@ public class TestTestMode {
 
     @Test
     void shouldCreateBlockedUserWithoutLogin() {
-        var registrationInfo = createRegisterUserWithStatus(BLOCKED);
+        var registrationInfo = createRegisterUserWithStatus("blocked");
         $("[data-test-id=login] input").setValue(registrationInfo.getLogin());
         $("[data-test-id=password] input").setValue(registrationInfo.getPassword());
         $$(byXpath("//*[@data-test-id='action-login']/span/span[1]")).find(exactText("Продолжить")).click();
@@ -50,7 +50,7 @@ public class TestTestMode {
     }
     @Test
     void shouldNotSendFormWithIncorrectUserData() {
-        var registrationInfo = DataGenerator.generateInfo("ru",ACTIVE);
+        var registrationInfo = DataGenerator.generateInfo("active");
         $("[data-test-id=login] input").setValue(registrationInfo.getLogin());
         $("[data-test-id=password] input").setValue(registrationInfo.getPassword());
         $$(byXpath("//*[@data-test-id='action-login']/span/span[1]")).find(exactText("Продолжить")).click();
@@ -61,7 +61,7 @@ public class TestTestMode {
 
     @Test
     void shouldNotSendFormWithIncorrectLogin() {
-        var registrationInfo = createRegisterUserWithStatus(ACTIVE);
+        var registrationInfo = createRegisterUserWithStatus("active");
         $("[data-test-id=login] input").setValue(generateRandomString());
         $("[data-test-id=password] input").setValue(registrationInfo.getPassword());
         $$(byXpath("//*[@data-test-id='action-login']/span/span[1]")).find(exactText("Продолжить")).click();
@@ -72,7 +72,7 @@ public class TestTestMode {
 
     @Test
     void shouldNotSendFormWithIncorrectPassword() {
-        var registrationInfo = createRegisterUserWithStatus(ACTIVE);
+        var registrationInfo = createRegisterUserWithStatus("active");
         $("[data-test-id=login] input").setValue(registrationInfo.getLogin());
         $("[data-test-id=password] input").setValue(generateRandomString());
         $$(byXpath("//*[@data-test-id='action-login']/span/span[1]")).find(exactText("Продолжить")).click();

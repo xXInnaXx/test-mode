@@ -14,12 +14,10 @@ import static io.restassured.RestAssured.given;
 public class DataGenerator {
 
     private static final Gson GSON = new Gson();
-    public static final String ACTIVE="active";
-    public static final String BLOCKED="blocked";
     private static final Faker FAKER = new Faker(new Locale("ru"));
     public static final String STRING_MASK = "??????";
 
-    public static RegistrationInfo generateInfo(String locale, String status) {
+    public static RegistrationInfo generateInfo(String status) {
         return new RegistrationInfo(FAKER.name().fullName().trim(),
                 FAKER.letterify(STRING_MASK),
                 status);
@@ -37,7 +35,7 @@ public class DataGenerator {
     }
 
     public static DataGenerator.RegistrationInfo createRegisterUserWithStatus(String status) {
-        var registrationInfo = DataGenerator.generateInfo("ru", status);
+        var registrationInfo = DataGenerator.generateInfo(status);
         String jsonUserInfo = GSON.toJson(registrationInfo);
         given()
                 .baseUri("http://localhost:9999")
